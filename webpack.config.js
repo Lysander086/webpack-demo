@@ -1,5 +1,8 @@
 // 自带的库
 const path = require('path')
+const ExtractTextPlugin = require("extract-text-webpack-plugin")
+
+
 module.exports = {
   // 1 entry
   entry: './app/index.js', // 入口文件
@@ -31,7 +34,23 @@ module.exports = {
           }
         }]
       },
+      {
+        test: /\.css$/,
+        loader: ExtractTextPlugin.extract({
+          // 必须这样写，否则会报错
+          fallback: 'style-loader',
+          use: [{
+            loader: 'css-loader',
+            options: {
+              modules: true
+            }
+          }]
+        })
+      },
 
     ]
-  }
+  },
+  plugins: [
+    new ExtractTextPlugin("css/[name].[hash].css")
+  ]
 }

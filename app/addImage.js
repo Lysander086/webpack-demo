@@ -1,4 +1,5 @@
 
+import '../styles/addImage.css'
 
 export function appendImages(){
   let smallImg = document.createElement('img')
